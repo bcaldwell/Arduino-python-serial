@@ -125,7 +125,7 @@ def controlarduino():
 #Main loop, run while connected is true
 while connected == True:
 	#desplay options
-	option=input("\n1. Enter 'r' to read from arduino\n2. Enter 'w' to pass message to the arduino\n3. Enter 'a' todo two way communitcation with arduino\n4. Enter 'e' to exit:\n")
+	option=raw_input("\n1. Enter 'r' to read from arduino\n2. Enter 'w' to pass message to the arduino\n3. Enter 'a' todo two way communitcation with arduino\n4. Enter 'e' to exit:\n")
 	
 	#the following commands will exit
 	if option == "exit":
