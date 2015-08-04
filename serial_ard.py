@@ -15,7 +15,7 @@ from time import sleep
 
 #connect to arduino by trying the following list of serial ports, mac need to be added
 locations=['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3','/dev/ttyUSB0','/dev/ttyUSB1','/dev/ttyUSB2','/dev/ttyUSB3',  
-'/dev/ttyS0','/dev/ttyS1','/dev/ttyS2','/dev/ttyS3','COM1','COM2','COM3']    
+'/dev/ttyS0','/dev/ttyS1','/dev/ttyS2','/dev/ttyS3','COM1','COM2','COM3', 'COM4']    
 connected =False #set connected to be false
 
 #try each serial port, exit loop if one connects and set connected to True, else desplay failed to connect to any arduino
