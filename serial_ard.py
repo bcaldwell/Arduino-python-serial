@@ -102,7 +102,7 @@ def controlarduino():
 		print (readline())
 
 	#get section from user and write to arduino
-	selection=input ()
+	selection=raw_input ()
 	writetext(selection)
 
 	#get reading from arduino
@@ -112,7 +112,7 @@ def controlarduino():
 	#while continu is true continue running
 	while continu==True:
 		#get command from user
-		command=input()	
+		command=raw_input()	
 
 		#if command if r then get reading from arduino, used to flush serial port
 		if command=="r":
