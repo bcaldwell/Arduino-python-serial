@@ -19,7 +19,7 @@ locations=['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3','/dev/tty
 connected =False #set connected to be false
 
 #try each serial port, exit loop if one connects and set connected to True, else desplay failed to connect to any arduino
-for device in location:   
+for device in locations:   
 	#try to connect to current device 
     try:    
         #print ("Trying..."+device)  
