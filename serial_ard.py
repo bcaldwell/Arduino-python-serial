@@ -38,13 +38,18 @@ else:
 #function converts assci to readable text
 def convert (enter):
 	out=""
-	for a in range (0,len(enter)):
-
-		#if enter[a] is \n or 'enter' return string out
-		if (enter[a])==13:
-			return out
-		else:	#if enter[a] is not \n then add the text value of it to out
-			out=out+chr(enter[a])
+	#See if input is integers representing ASCII values and convert if so
+	try:
+		for a in range (0,len(enter)):
+	
+			#if enter[a] is \n or 'enter' return string out
+			if (enter[a])==13:
+				return out
+			else:	#if enter[a] is not \n then add the text value of it to out
+				out=out+chr(enter[a])
+	#Otherwise enter is a string, so make out == enter
+	except TypeError:
+		out = enter
 	#if string is not returns and all characters have been used added, then return out
 	return out
 
