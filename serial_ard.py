@@ -57,9 +57,9 @@ def readline():
 #function allows user to get more than one reading from arduino
 def read ():
 	#determine how many lines should be read from arduino
-	inp=input ("How many values should be read? ")
+	inp=raw_input ("How many values should be read? ")
 	while inp.isdigit()!=True:
-		inp = input ("Please enter a number: ")
+		inp = raw_input ("Please enter a number: ")
 	length =int(inp)
 	arduino.flush;
 	#manual flush, dont know if the flush works properally...test
