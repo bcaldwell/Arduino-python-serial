@@ -78,8 +78,11 @@ def read ():
 
 #function writes passed text to the arduino
 def writetext (inp):
-	for a in inp:
-		arduino.write(bytes(a,'ascii'))	#in order for the arduino to understand, pass must be converted to ascii
+	try:
+		for a in inp:
+			arduino.write(bytes(a,'ascii'))	#in order for the arduino to understand, pass must be converted to ascii
+	except TypeError:
+		arduino.write(inp)
 
 #function get input from user then write that input to the arduino via serial
 def write():
