@@ -15,11 +15,11 @@ from time import sleep
 
 #connect to arduino by trying the following list of serial ports, mac need to be added
 locations=['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3','/dev/ttyUSB0','/dev/ttyUSB1','/dev/ttyUSB2','/dev/ttyUSB3',  
-'/dev/ttyS0','/dev/ttyS1','/dev/ttyS2','/dev/ttyS3','COM1','COM2','COM3']    
+'/dev/ttyS0','/dev/ttyS1','/dev/ttyS2','/dev/ttyS3','COM1','COM2','COM3', 'COM4']    
 connected =False #set connected to be false
 
 #try each serial port, exit loop if one connects and set connected to True, else desplay failed to connect to any arduino
-for device in locationPeacocks:   
+for device in locations:   
 	#try to connect to current device 
     try:    
         #print ("Trying..."+device)  
@@ -38,13 +38,18 @@ else:
 #function converts assci to readable text
 def convert (enter):
 	out=""
-	for a in range (0,len(enter)):
-
-		#if enter[a] is \n or 'enter' return string out
-		if (enter[a])==13:
-			return out
-		else:	#if enter[a] is not \n then add the text value of it to out
-			out=out+chr(enter[a])
+	#See if input is integers representing ASCII values and convert if so
+	try:
+		for a in range (0,len(enter)):
+	
+			#if enter[a] is \n or 'enter' return string out
+			if (enter[a])==13:
+				return out
+			else:	#if enter[a] is not \n then add the text value of it to out
+				out=out+chr(enter[a])
+	#Otherwise enter is a string, so make out == enter
+	except TypeError:
+		out = enter
 	#if string is not returns and all characters have been used added, then return out
 	return out
 
@@ -57,9 +62,9 @@ def readline():
 #function allows user to get more than one reading from arduino
 def read ():
 	#determine how many lines should be read from arduino
-	inp=input ("How many values should be read? ")
+	inp=raw_input ("How many values should be read? ")
 	while inp.isdigit()!=True:
-		inp = input ("Please enter a number: ")
+		inp = raw_input ("Please enter a number: ")
 	length =int(inp)
 	arduino.flush;
 	#manual flush, dont know if the flush works properally...test
@@ -73,8 +78,11 @@ def read ():
 
 #function writes passed text to the arduino
 def writetext (inp):
-	for a in inp:
-		arduino.write(bytes(a,'ascii'))	#in order for the arduino to understand, pass must be converted to ascii
+	try:
+		for a in inp:
+			arduino.write(bytes(a,'ascii'))	#in order for the arduino to understand, pass must be converted to ascii
+	except TypeError:
+		arduino.write(inp)
 
 #function get input from user then write that input to the arduino via serial
 def write():
@@ -94,7 +102,7 @@ def controlarduino():
 		print (readline())
 
 	#get section from user and write to arduino
-	selection=input ()
+	selection=raw_input ()
 	writetext(selection)
 
 	#get reading from arduino
@@ -104,7 +112,7 @@ def controlarduino():
 	#while continu is true continue running
 	while continu==True:
 		#get command from user
-		command=input()	
+		command=raw_input()	
 
 		#if command if r then get reading from arduino, used to flush serial port
 		if command=="r":
@@ -125,7 +133,7 @@ def controlarduino():
 #Main loop, run while connected is true
 while connected == True:
 	#desplay options
-	option=input("\n1. Enter 'r' to read from arduino\n2. Enter 'w' to pass message to the arduino\n3. Enter 'a' todo two way communitcation with arduino\n4. Enter 'e' to exit:\n")
+	option=raw_input("\n1. Enter 'r' to read from arduino\n2. Enter 'w' to pass message to the arduino\n3. Enter 'a' todo two way communitcation with arduino\n4. Enter 'e' to exit:\n")
 	
 	#the following commands will exit
 	if option == "exit":
